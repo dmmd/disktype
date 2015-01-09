@@ -180,8 +180,6 @@ static void print_kind(int filekind, u8 size, int size_known)
     if(jflag){
       printf(",");
       print_json("device_type", kindname);
-      printf(",");
-      print_json("size", buf);
     } else {
       print_line(0, "%s, size %s", kindname, buf);
     }

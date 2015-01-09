@@ -66,7 +66,7 @@ void print_json(const char *key, const char *value)
 
 void print_json_u8(const char *key, const u8 size)
 {
-  printf("\"%s\":%llu", key, size);
+  printf("\"%s\": %llu", key, size);
 }
 void start_line(const char *fmt, ...)
 {
