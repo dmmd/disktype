@@ -571,10 +571,19 @@ void detect_ntfs(SECTION *section, int level)
   sectcount = get_le_quad(buf + 0x28);
 
   /* tell the user */
-  print_line(level, "NTFS file system");
-
+  if(jflag){
+    printf(",");
+    print_json("file_system", "NTFS");
+  } else {
+    print_line(level, "NTFS file system");
+  }
   format_blocky_size(s, sectcount, sectsize, "sectors", NULL);
-  print_line(level + 1, "Volume size %s", s);
+  if(jflag){
+    printf(",");
+    print_json("volume_size", s);
+  } else {
+    print_line(level + 1, "Volume size %s", s);
+  }
 }
 
 /*

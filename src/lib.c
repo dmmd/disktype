@@ -59,6 +59,11 @@ void print_line(int level, const char *fmt, ...)
   printf("%s%s\n", insets[level], line_akku);
 }
 
+void print_json(const char *key, const char *value)
+{
+  printf("\"%s\":\"%s\"", key, value);
+}
+
 void start_line(const char *fmt, ...)
 {
   va_list par;

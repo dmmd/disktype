@@ -47,7 +47,7 @@
 #define FLAG_IN_DISKLABEL (0x0001)
 
 /* types */
-
+int jflag;
 typedef signed char s1;
 typedef unsigned char u1;
 typedef short int s2;

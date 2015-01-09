@@ -49,7 +49,7 @@ static void show_macos_type(const char *filename);
 int main(int argc, char *argv[])
 {
   int i;
-  int jflag = 0;
+  jflag = 0;
 
   if (argc < 2) {
     fprintf(stderr, "Usage: %s [option] <device/file>...\n", PROGNAME);
@@ -58,10 +58,12 @@ int main(int argc, char *argv[])
 
   if(argc == 3){
     if(strcmp(argv[1], "-j") == 0){
+
       jflag = 1;
       for (i = 2; i < argc; i++) {
-        printf("%i",jflag);
+        printf("{\"disktype\":{");
         analyze_file(argv[i]);
+        printf("}}");
       }
     }
   } else {
@@ -84,8 +86,11 @@ static void analyze_file(const char *filename)
   char *reason;
   SOURCE *s;
 
-  print_line(0, "--- %s", filename);
-
+  if(jflag){
+    print_json("filename", filename);
+  } else {
+    print_line(0, "--- %s", filename);
+  }
   /* stat check */
   if (stat(filename, &sb) < 0) {
     errore("Can't stat %.300s", filename);
@@ -172,7 +177,14 @@ static void print_kind(int filekind, u8 size, int size_known)
 
   if (size_known) {
     format_size_verbose(buf, size);
-    print_line(0, "%s, size %s", kindname, buf);
+    if(jflag){
+      printf(",");
+      print_json("device_type", kindname);
+      printf(",");
+      print_json("size", buf);
+    } else {
+      print_line(0, "%s, size %s", kindname, buf);
+    }
   } else {
     print_line(0, "%s, unknown size", kindname);
   }
