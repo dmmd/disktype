@@ -59,10 +59,16 @@ int main(int argc, char *argv[])
   if(argc == 3){
     if(strcmp(argv[1], "-j") == 0){
       jflag = 1;
+      for (i = 2; i < argc; i++) {
+        printf("%i",jflag);
+        analyze_file(argv[i]);
+      }
+    }
+  } else {
+    for (i = 1; i < argc; i++) {
+      analyze_file(argv[i]);
     }
   }
-
-  printf("jflag: %i\n", jflag);
   return 0;
 }
 
