@@ -162,4 +162,6 @@ void errore(const char *msg, ...);
 void bailout(const char *msg, ...);
 void bailoute(const char *msg, ...);
 
+void print_json(const char *key, const char *value);
+void print_json_u8(const char *key, const u8 size);
 /* EOF */

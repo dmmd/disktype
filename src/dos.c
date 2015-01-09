@@ -580,7 +580,7 @@ void detect_ntfs(SECTION *section, int level)
   format_blocky_size(s, sectcount, sectsize, "sectors", NULL);
   if(jflag){
     printf(",");
-    print_json("volume_size", s);
+    print_json_u8("volume_size", sectcount * sectsize);
   } else {
     print_line(level + 1, "Volume size %s", s);
   }
@@ -607,8 +607,9 @@ void detect_hpfs(SECTION *section, int level)
 
   sectcount = get_le_long(buf + 16);
   format_blocky_size(s, sectcount, 512, "sectors", NULL);
-  print_line(level + 1, "Volume size %s", s);
 
+  print_line(level + 1, "Volume size %s", s);
+  
   /* TODO: BPB in boot sector, volume label -- information? */
 }
 

@@ -64,6 +64,10 @@ void print_json(const char *key, const char *value)
   printf("\"%s\":\"%s\"", key, value);
 }
 
+void print_json_u8(const char *key, const u8 size)
+{
+  printf("\"%s\":%llu", key, size);
+}
 void start_line(const char *fmt, ...)
 {
   va_list par;
@@ -215,7 +219,12 @@ void format_size_verbose(char *buf, u8 size)
   if (used == 2)
     return;
 
-  sprintf(strchr(buf, 0), " (%llu bytes)", size);
+  if(jflag){
+    printf(",");
+    print_json_u8("size", size);
+  } else {
+    sprintf(strchr(buf, 0), " (%llu bytes)", size);
+  }
 }
 
 void format_ascii(void *from, char *to)
